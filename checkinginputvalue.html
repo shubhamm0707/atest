@@ -20,13 +20,22 @@
 </head>
 <body>
 
-   <input type="text" placeholder="First"/>
+   <div class="dv">
+    <input type="text" placeholder="First" readonly="readonly"/>
+   </div>
 
   <button id="clickme">Click me</button>
 
 <script>
     var btn = document.getElementById('clickme');
+    
     var input = document.querySelector('input');
+    var dv = document.querySelector('div');
+
+    dv.addEventListener("focus", function(e) {
+    e.stopPropagation();
+    // Other actions here
+});
 
     input.addEventListener('input', () => {
         console.log('Input value has changed:', input.value);
@@ -38,6 +47,7 @@
         var inputEvent = new Event('input', { bubbles: true });
         input.dispatchEvent(inputEvent);
     });
+
 </script>
 
 <input type="radio" name="option" value="option1"> Option 1<br>
@@ -73,6 +83,22 @@
             });
         });
     </script>
+
+<h2>Contact Us</h2>
+
+<form id="contactForm" action="submit_form.php" method="post">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+    
+    <input type="submit" value="Submit">
+</form>
+
     
 </body>
 </html>
