@@ -20,18 +20,25 @@
 </head>
 <body>
 
-    <input type="text" placeholder="First"/>
+   <input type="text" placeholder="First"/>
 
-    <button id="clickme">Click me</button>
+  <button id="clickme">Click me</button>
 
-    <script>
-        var btn = document.getElementById('clickme');
-        var input = document.querySelector('input');
+<script>
+    var btn = document.getElementById('clickme');
+    var input = document.querySelector('input');
 
-        btn.addEventListener( 'click', ()=>{
-            input.value = "This is data";
-        })
-    </script>
+    input.addEventListener('input', () => {
+        console.log('Input value has changed:', input.value);
+    });
+
+    btn.addEventListener('click', () => {
+        input.value = "This is data";
+        // Trigger the input event manually after changing the value programmatically
+        var inputEvent = new Event('input', { bubbles: true });
+        input.dispatchEvent(inputEvent);
+    });
+</script>
     
 </body>
 </html>
