@@ -39,6 +39,40 @@
         input.dispatchEvent(inputEvent);
     });
 </script>
+
+<input type="radio" name="option" value="option1"> Option 1<br>
+    <input type="radio" name="option" value="option2"> Option 2<br>
+    <input type="radio" name="option" value="option3"> Option 3<br>
+    <button id="externalButton">Change Radio</button>
+
+    <script>
+        let selectedOption = null;
+
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                selectedOption = event.target.value;
+            });
+        });
+
+        const externalButton = document.getElementById('externalButton');
+        externalButton.addEventListener('click', () => {
+            // Change the selected radio button option based on your logic
+            // For example, you could cycle through the options or set a specific option.
+            // Here, we'll just cycle through them.
+            if (selectedOption === null) {
+                selectedOption = radioButtons[0].value;
+            } else {
+                const currentIndex = Array.from(radioButtons).findIndex(radio => radio.value === selectedOption);
+                const nextIndex = (currentIndex + 1) % radioButtons.length;
+                selectedOption = radioButtons[nextIndex].value;
+            }
+            // Update the UI if needed
+            radioButtons.forEach(radio => {
+                radio.checked = radio.value === selectedOption;
+            });
+        });
+    </script>
     
 </body>
 </html>
