@@ -21,7 +21,7 @@
 <body>
 
    <div class="dv">
-    <input type="text" placeholder="First">
+    <input type="text" placeholder="First"/>
    </div>
 
   <button id="clickme">Click me</button>
@@ -36,6 +36,13 @@
     e.stopPropagation();
     // Other actions here
 });
+
+    input.addEventListener('input', () => {
+        console.log('Input EVENT:', input.value);
+    });
+    input.addEventListener('change', () => {
+        console.log('Change EVENT:', input.value);
+    });
 
     btn.addEventListener('click', () => {
         input.value = "This is data";
