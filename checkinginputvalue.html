@@ -37,15 +37,8 @@
     // Other actions here
 });
 
-    input.addEventListener('input', () => {
-        console.log('Input value has changed:', input.value);
-    });
-
     btn.addEventListener('click', () => {
         input.value = "This is data";
-        // Trigger the input event manually after changing the value programmatically
-        var inputEvent = new Event('input', { bubbles: true });
-        input.dispatchEvent(inputEvent);
     });
 
 </script>
@@ -84,20 +77,7 @@
         });
     </script>
 
-<h2>Contact Us</h2>
 
-<form id="contactForm" action="submit_form.php" method="post">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" required><br><br>
-    
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
-    
-    <label for="message">Message:</label><br>
-    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
-    
-    <input type="submit" value="Submit">
-</form>
 
     
 </body>
