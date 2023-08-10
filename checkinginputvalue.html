@@ -17,6 +17,70 @@
         f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existing_jquery:function(){return use_existing_jquery},library_tolerance:function(){return library_tolerance},finish:function(){if(!f){f=true;var e=d.getElementById('_vis_opt_path_hides');if(e)e.parentNode.removeChild(e)}},finished:function(){return f},load:function(e){var t=d.createElement('script');t.fetchPriority='high';t.src=e;t.type='text/javascript';t.innerText;t.onerror=function(){_vwo_code.finish()};d.getElementsByTagName('head')[0].appendChild(t)},getVersion:function(){return version},getMatchedCookies:function(e){var t=[];if(document.cookie){t=document.cookie.match(e)||[]}return t},getCombinationCookie:function(){var e=code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);e=e.map(function(e){try{var t=decodeURIComponent(e);if(!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)){return''}return t}catch(e){return''}});var i=[];e.forEach(function(e){var t=e.match(/([\d,]+)/g);t&&i.push(t.join('-'))});return i.join('|')},init:function(){window.settings_timer=setTimeout(function(){_vwo_code.finish()},settings_tolerance);var e=d.createElement('style'),t=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',i=d.getElementsByTagName('head')[0];e.setAttribute('id','_vis_opt_path_hides');vwoCodeEl&&e.setAttribute('nonce',vwoCodeEl.nonce);e.setAttribute('type','text/css');if(e.styleSheet)e.styleSheet.cssText=t;else e.appendChild(d.createTextNode(t));i.appendChild(e);var n=this.getCombinationCookie();this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+ +is_spa+'&vn='+version+(n?'&c='+n:''));return settings_timer}};window._vwo_settings_timer = code.init();return code;}());
         </script>
         <!-- End VWO Async SmartCode -->
+
+        <script>
+            function injectPropertyEvents(element, propertyName) {
+    if (!(propertyName in element))
+        throw new Error("Element does not have property " + propertyName);
+ 
+    var propertyHolder = element;
+    var descriptor;
+    while (propertyHolder !== null) {
+        descriptor = Object.getOwnPropertyDescriptor(propertyHolder, propertyName);
+        if (descriptor)
+            break;
+        propertyHolder = Object.getPrototypeOf(propertyHolder);
+    }
+ 
+    if (!descriptor)
+        throw new Error("Could not find property desciptor " + propertyName);
+ 
+    if (propertyHolder.propertyEventsInjected)
+        return;
+ 
+    function raiseEvent(element, eventName, eventDetails) {
+        var event;
+        var bubbles = true;
+        var cancelable = false;
+        try {
+            event = new CustomEvent(eventName, {
+                bubbles: bubbles,
+                cancelable: cancelable,
+                detail: eventDetails
+            });
+        } catch (e) {
+            event = document.createEvent("CustomEvent");
+            event.initCustomEvent(eventName, bubbles, cancelable, eventDetails);
+        }
+        element.dispatchEvent(event);
+    }
+ 
+    Object.defineProperty(propertyHolder, propertyName, {
+        configurable: true,
+        get: function get() {
+            var eventDetails = {
+                value: descriptor.get.call(this)
+            }
+            raiseEvent(this, propertyName + "Getting", eventDetails);
+            return eventDetails.value;
+        },
+        set: function set(value) {
+            console.log("wrwerew");
+            debugger;
+            var eventDetails = {
+                oldValue: descriptor.get.call(this),
+                newValue: value
+            };
+            raiseEvent(this, propertyName + "Changing", eventDetails);
+            descriptor.set.call(this, eventDetails.newValue);
+            raiseEvent(this, propertyName + "Changed", eventDetails);
+        }
+    });
+ 
+    propertyHolder.propertyEventsInjected = true;
+}
+    injectPropertyEvents(input, 'value');
+        </script>
 </head>
 <body>
 
@@ -83,6 +147,20 @@
             });
         });
     </script>
+
+    <input type="text" id="myInput" />
+
+<script>
+const inputElement = document.getElementById("myInput");
+
+inputElement.addEventListener("input", function() {
+  console.log("Input value changed:", inputElement.value);
+});
+
+// Programmatically set the value
+inputElement.value = "New Value";
+</script>
+
 
 
 
