@@ -19,71 +19,9 @@
         </script>
         <!-- End VWO Async SmartCode -->
 
-        <script>
-            function injectPropertyEvents(element, propertyName) {
-    if (!(propertyName in element))
-        throw new Error("Element does not have property " + propertyName);
- 
-    var propertyHolder = element;
-    var descriptor;
-    while (propertyHolder !== null) {
-        descriptor = Object.getOwnPropertyDescriptor(propertyHolder, propertyName);
-        if (descriptor)
-            break;
-        propertyHolder = Object.getPrototypeOf(propertyHolder);
-    }
- 
-    if (!descriptor)
-        throw new Error("Could not find property desciptor " + propertyName);
- 
-    if (propertyHolder.propertyEventsInjected)
-        return;
- 
-    function raiseEvent(element, eventName, eventDetails) {
-        var event;
-        var bubbles = true;
-        var cancelable = false;
-        try {
-            event = new CustomEvent(eventName, {
-                bubbles: bubbles,
-                cancelable: cancelable,
-                detail: eventDetails
-            });
-        } catch (e) {
-            event = document.createEvent("CustomEvent");
-            event.initCustomEvent(eventName, bubbles, cancelable, eventDetails);
-        }
-        element.dispatchEvent(event);
-    }
- 
-    Object.defineProperty(propertyHolder, propertyName, {
-        configurable: true,
-        get: function get() {
-            var eventDetails = {
-                value: descriptor.get.call(this)
-            }
-            raiseEvent(this, propertyName + "Getting", eventDetails);
-            return eventDetails.value;
-        },
-        set: function set(value) {
-            console.log("wrwerew");
-            debugger;
-            var eventDetails = {
-                oldValue: descriptor.get.call(this),
-                newValue: value
-            };
-            raiseEvent(this, propertyName + "Changing", eventDetails);
-            descriptor.set.call(this, eventDetails.newValue);
-            raiseEvent(this, propertyName + "Changed", eventDetails);
-        }
-    });
- 
-    propertyHolder.propertyEventsInjected = true;
-}
-    injectPropertyEvents(input, 'value');
-        </script>
 </head>
 <body>
+    <form id="miniform">
     <h2>Submit Form Example</h2>
     <form id="myForm">
       <label for="name">Name:</label>
@@ -94,13 +32,14 @@
   
       <button type="submit">Submit</button>
     </form>
+</form>
   
     <div id="message"></div>
   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function() {
-        $('#myForm').submit(function(event) {
+        $('#miniform').submit(function(event) {
           event.preventDefault(); // Prevent default form submission
   
           var formData = $(this).serialize(); // Serialize form data
