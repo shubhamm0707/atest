@@ -29,6 +29,10 @@
         <p slot="footer">&copy; 2023 My Awesome Website. All rights reserved.</p>
     </my-simple-component>
 
+    <my-simple-component-2>
+        <h1>Welcome to My Awesome Website</h1>
+    </my-simple-component-2>
+
     <script>
         class MySimpleComponent extends HTMLElement {
             constructor() {
@@ -52,6 +56,24 @@
                 shadowRoot.appendChild(template.content.cloneNode(true));
             }
         }
+
+        class MySimpleComponent2 extends HTMLElement {
+            constructor() {
+                super();
+
+                const template = document.createElement('template');
+                template.innerHTML = `
+                    <div>
+                        <slot></slot>
+                    </div>
+                `;
+
+                const shadowRoot = this.attachShadow({ mode: 'open' });
+                shadowRoot.appendChild(template.content.cloneNode(true));
+            }
+        }
+
+        customElements.define('my-simple-component-2', MySimpleComponent2);
 
         customElements.define('my-simple-component', MySimpleComponent);
     </script>
