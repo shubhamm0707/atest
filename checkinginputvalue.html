@@ -31,6 +31,7 @@
 
     <my-simple-component-2>
         <h1>Welcome to My Awesome Website</h1>
+        <p>This is p tag</p>
     </my-simple-component-2>
 
     <script>
@@ -41,14 +42,14 @@
                 const template = document.createElement('template');
                 template.innerHTML = `
                     <header>
-                        <slot name="title">This is title text</slot>
+                        <slot name="title"></slot>
                     </header>
                     <main>
-                        <slot name="about">This is about text</slot>
+                        <slot name="about"></slot>
                         <slot name="contact"></slot>
                     </main>
                     <footer>
-                        <slot name="footer"><p>This is footer text inside P tag</p></slot>
+                        <slot name="footer"></slot>
                     </footer>
                 `;
 
