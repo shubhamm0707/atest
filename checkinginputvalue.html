@@ -22,64 +22,20 @@
             <!-- End VWO Async SmartCode -->
 </head>
 <body>
-    <my-simple-component>
-        <p slot="footer">&copy; 2023 My Awesome Website. All rights reserved.</p>
-        <h1 slot="title">Welcome to My Awesome Website</h1>
-        <p slot="contact">Email us at contact@example.com or call 123-456-7890.</p>
-        <p slot="about">We are a passionate team dedicated to creating amazing web experiences.</p>
-    </my-simple-component>
+  <h1>Basic HTML Form</h1>
+    <div>
 
-    <my-simple-component-2>
-        <h1>Welcome to My Awesome Website</h1>
-        <p>This is p tag</p>
-    </my-simple-component-2>
+        <p>This is first p tag 1</p>
+        <p>This is first p tag 2</p>
 
-    <script>
-        class MySimpleComponent extends HTMLElement {
-            constructor() {
-                super();
+    </div>
 
-                const template = document.createElement('template');
-                template.innerHTML = `
-                    <header>
-                        <slot name="title"></slot>
-                    </header>
-                    <main>
-                        <slot name="about"></slot>
-                        <slot name="contact"></slot>
-                    </main>
-                    <footer>
-                        <slot name="footer"></slot>
-                    </footer>
-                `;
+    <h1>This is h1</h1>
+    <h2>This is h2</h2>
 
-                const shadowRoot = this.attachShadow({ mode: 'open' });
-                shadowRoot.appendChild(template.content.cloneNode(true));
-            }
-        }
+    <div>
 
-        class MySimpleComponent2 extends HTMLElement {
-            constructor() {
-                super();
+    </div>
 
-                const template = document.createElement('template');
-                template.innerHTML = `
-                    <div>
-                        <slot></slot>
-                    </div>
-                `;
-
-                const shadowRoot = this.attachShadow({ mode: 'open' });
-                shadowRoot.appendChild(template.content.cloneNode(true));
-            }
-        }
-
-        customElements.define('my-simple-component-2', MySimpleComponent2);
-
-        customElements.define('my-simple-component', MySimpleComponent);
-        window.Aura = {
-          app: 'siteforce'
-        }
-    </script>
 </body>
 </html>
