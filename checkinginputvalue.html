@@ -22,13 +22,38 @@
             <!-- End VWO Async SmartCode -->
 </head>
 <body>
-  <h1>Basic HTML Form</h1>
-    <div id="firstdiv">
-        <p>This is data</p>
-        <div id="first2div"><h1>hey</h1></div>
-    </div>
-    <div id="second">
-        <div>This is me</div>
-    </div>
+    <my-simple-component>
+        <h1 slot="title">Welcome to My Awesome Website</h1>
+        <p slot="about">We are a passionate team dedicated to creating amazing web experiences.</p>
+        <p slot="contact">Email us at contact@example.com or call 123-456-7890.</p>
+        <p slot="footer">&copy; 2023 My Awesome Website. All rights reserved.</p>
+    </my-simple-component>
+
+    <script>
+        class MySimpleComponent extends HTMLElement {
+            constructor() {
+                super();
+
+                const template = document.createElement('template');
+                template.innerHTML = `
+                    <header>
+                        <slot name="title"></slot>
+                    </header>
+                    <main>
+                        <slot name="about"></slot>
+                        <slot name="contact"></slot>
+                    </main>
+                    <footer>
+                        <slot name="footer"></slot>
+                    </footer>
+                `;
+
+                const shadowRoot = this.attachShadow({ mode: 'open' });
+                shadowRoot.appendChild(template.content.cloneNode(true));
+            }
+        }
+
+        customElements.define('my-simple-component', MySimpleComponent);
+    </script>
 </body>
 </html>
