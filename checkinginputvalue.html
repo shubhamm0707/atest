@@ -37,14 +37,14 @@
                 const template = document.createElement('template');
                 template.innerHTML = `
                     <header>
-                        <slot name="title"></slot>
+                        <slot name="title">This is title text</slot>
                     </header>
                     <main>
-                        <slot name="about"></slot>
+                        <slot name="about">This is about text</slot>
                         <slot name="contact"></slot>
                     </main>
                     <footer>
-                        <slot name="footer"></slot>
+                        <slot name="footer"><p>This is footer text inside P tag</p></slot>
                     </footer>
                 `;
 
