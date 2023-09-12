@@ -3,70 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow DOM Example</title>
-  </style>
-  <script type='text/javascript' id='vwoCode'>
-      window._vwo_code=window._vwo_code || (function() {
-      var account_id=666199,
-      version=1.4,
-      settings_tolerance=2000,
-      library_tolerance=2500,
-      use_existing_jquery=false,
-      is_spa=1,
-      hide_element='body',
-      /* DO NOT EDIT BELOW THIS LINE */
-      f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existing_jquery:function(){return use_existing_jquery},library_tolerance:function(){return library_tolerance},finish:function(){if(!f){f=true;var e=d.getElementById('_vis_opt_path_hides');if(e)e.parentNode.removeChild(e)}},finished:function(){return f},load:function(e){var t=d.createElement('script');t.fetchPriority='high';t.src=e;t.type='text/javascript';t.innerText;t.onerror=function(){_vwo_code.finish()};d.getElementsByTagName('head')[0].appendChild(t)},getVersion:function(){return version},getMatchedCookies:function(e){var t=[];if(document.cookie){t=document.cookie.match(e)||[]}return t},getCombinationCookie:function(){var e=code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);e=e.map(function(e){try{var t=decodeURIComponent(e);if(!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)){return''}return t}catch(e){return''}});var i=[];e.forEach(function(e){var t=e.match(/([\d,]+)/g);t&&i.push(t.join('-'))});return i.join('|')},init:function(){window.settings_timer=setTimeout(function(){_vwo_code.finish()},settings_tolerance);var e=d.createElement('style'),t=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',i=d.getElementsByTagName('head')[0];e.setAttribute('id','_vis_opt_path_hides');vwoCodeEl&&e.setAttribute('nonce',vwoCodeEl.nonce);e.setAttribute('type','text/css');if(e.styleSheet)e.styleSheet.cssText=t;else e.appendChild(d.createTextNode(t));i.appendChild(e);var n=this.getCombinationCookie();this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+ +is_spa+'&vn='+version+(n?'&c='+n:''));return settings_timer}};window._vwo_settings_timer = code.init();return code;}());
-      </script>
-      <!-- End VWO Async SmartCode -->
+    <title>My Simple Web Component</title>
+    <style>
+        /* Your component's styles here */
+    </style>
+        <script type='text/javascript' id='vwoCode'>
+            window._vwo_code=window._vwo_code || (function() {
+            var account_id=666199,
+            version=1.4,
+            settings_tolerance=2000,
+            library_tolerance=2500,
+            use_existing_jquery=false,
+            is_spa=1,
+            hide_element='body',
+            /* DO NOT EDIT BELOW THIS LINE */
+            f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existing_jquery:function(){return use_existing_jquery},library_tolerance:function(){return library_tolerance},finish:function(){if(!f){f=true;var e=d.getElementById('_vis_opt_path_hides');if(e)e.parentNode.removeChild(e)}},finished:function(){return f},load:function(e){var t=d.createElement('script');t.fetchPriority='high';t.src=e;t.type='text/javascript';t.innerText;t.onerror=function(){_vwo_code.finish()};d.getElementsByTagName('head')[0].appendChild(t)},getVersion:function(){return version},getMatchedCookies:function(e){var t=[];if(document.cookie){t=document.cookie.match(e)||[]}return t},getCombinationCookie:function(){var e=code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);e=e.map(function(e){try{var t=decodeURIComponent(e);if(!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)){return''}return t}catch(e){return''}});var i=[];e.forEach(function(e){var t=e.match(/([\d,]+)/g);t&&i.push(t.join('-'))});return i.join('|')},init:function(){window.settings_timer=setTimeout(function(){_vwo_code.finish()},settings_tolerance);var e=d.createElement('style'),t=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',i=d.getElementsByTagName('head')[0];e.setAttribute('id','_vis_opt_path_hides');vwoCodeEl&&e.setAttribute('nonce',vwoCodeEl.nonce);e.setAttribute('type','text/css');if(e.styleSheet)e.styleSheet.cssText=t;else e.appendChild(d.createTextNode(t));i.appendChild(e);var n=this.getCombinationCookie();this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+ +is_spa+'&vn='+version+(n?'&c='+n:''));return settings_timer}};window._vwo_settings_timer = code.init();return code;}());
+            </script>
+            <!-- End VWO Async SmartCode -->
 </head>
 <body>
-    <div id="my-container">
-
-    </div>
+    <my-simple-component>
+        <h1 slot="title">Welcome to My Awesome Website</h1>
+        <p slot="about">We are a passionate team dedicated to creating amazing web experiences.</p>
+        <p slot="contact">Email us at contact@example.com or call 123-456-7890.</p>
+        <p slot="footer">&copy; 2023 My Awesome Website. All rights reserved.</p>
+    </my-simple-component>
 
     <script>
-        // Create a shadow DOM and attach it to the div with id "my-container"
-        const container = document.getElementById('my-container');
-        const shadowRoot = container.attachShadow({ mode: 'open' });
+        class MySimpleComponent extends HTMLElement {
+            constructor() {
+                super();
 
-        // Create a div element inside the shadow DOM
-        const div = document.createElement('div');
-        
-        // Apply styles to the shadow DOM div
-        const style = document.createElement('style');
-        style.textContent = `
-            div {
-                height: 600px;
-                width: 100px;
-                background-color: green;
-                padding: 10px;
-                border: 1px solid #ccc;
-                margin-top: 30px;
-                box-shadow: 3px 3px 5px #888888;
+                const template = document.createElement('template');
+                template.innerHTML = `
+                    <header>
+                        <slot name="title"></slot>
+                    </header>
+                    <main>
+                        <slot name="about"></slot>
+                        <slot name="contact"></slot>
+                    </main>
+                    <footer>
+                        <slot name="footer"></slot>
+                    </footer>
+                `;
+
+                const shadowRoot = this.attachShadow({ mode: 'open' });
+                shadowRoot.appendChild(template.content.cloneNode(true));
             }
-        `;
+        }
 
-        // Create a div element inside the shadow DOM
-        const div2 = document.createElement('div');
-        
-        // Apply styles to the shadow DOM div
-        const style2 = document.createElement('style');
-        style2.textContent = `
-            div {
-                height: 200px;
-                width: 100px;
-                background-color: green;
-                padding: 10px;
-                border: 1px solid #ccc;
-                box-shadow: 3px 3px 5px #888888;
-            }
-        `;
-
-        // Append the div and style to the shadow DOM
-        shadowRoot.appendChild(style);
-        shadowRoot.appendChild(div);
-
-        shadowRoot.appendChild(div2);
+        customElements.define('my-simple-component', MySimpleComponent);
     </script>
 </body>
 </html>
